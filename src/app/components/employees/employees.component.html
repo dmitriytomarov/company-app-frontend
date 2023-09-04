@@ -1,0 +1,43 @@
+<div class="container">
+  <h1 class="mb-4">Сотрудники</h1>
+  <P *ngIf="!(employees.length > 0)">{{ status }}</P>
+
+  <table class="table table-hover" *ngIf="employees.length > 0">
+    <thead>
+      <tr>
+        <td><input type="text" placeholder="..." class="input-group input-group-sm" [(ngModel)]="filterDep"></td>
+        <td><input type="text" placeholder="..." class="input-group input-group-sm" [(ngModel)]="fullName"></td>
+        <td></td>
+        <td></td>
+        <td><input type="text" placeholder="..." class="input-group input-group-sm" [(ngModel)]="filterSalary"></td>
+        <td hidden>Id</td>
+        <td></td>
+      </tr>
+      <tr style="font-weight: 600;">
+        <td style="min-width:max-content">Отдел</td>
+        <td class="col-3">Ф.И.О</td>
+        <td style="min-width:max-content">Дата рождения</td>
+        <td style="min-width:max-content">Дата устройства на работу</td>
+        <td style="min-width:max-content">Заработная плата</td>
+        <td hidden>Id</td>
+        <td style="width: 150px;"></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let e of employees | filter:fullName | filterDep : filterDep | filterSalary : filterSalary">
+        <td>{{ e.departmentName}}</td>
+        <td>{{ e.name }}</td>
+        <td>{{ e.birthday | date : 'dd.MM.YYYY' }}</td>
+        <td>{{ e.worksFrom |date : 'dd.MM.YYYY' }}</td>
+        <td>{{ e.salary }}</td>
+        <td hidden>{{ e.id }}</td>
+        <td style="align-content: right;">
+          <button type="button" class="btn btn-success btn-sm me-md-2" routerLink="add">+</button>
+          <button type="button" class="btn btn-warning btn-sm me-md-2" [routerLink]="['edit', e.id]">...</button>
+          <button type="button" class="btn btn-danger btn-sm me-md-2" [routerLink]="['delete', e.id]">x</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

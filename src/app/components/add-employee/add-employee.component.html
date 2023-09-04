@@ -1,0 +1,45 @@
+<div class="container my-5">
+  <h2 class="mb-4">Добавление нового сотрудника </h2>
+  <div class="row">
+    <div class="col-6">
+      <form #addForm="ngForm" (ngSubmit)="addEmployee()">
+        <div class="mb-3">
+          <label for="name" class="form-label">Ф.И.О.</label>
+          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="newEmployee.name">
+          <div id="nameHelp" class="form-text">Обязательное поле</div>
+        </div>
+        <div class="mb-3">
+          <label for="birthday" class="form-label">Дата рождения</label>
+          <input type="date" class="form-control" id="birthday" name="birthday" [(ngModel)]="newEmployee.birthday">
+        </div>
+        <div class="mb-3">
+          <label for="worksFrom" class="form-label">Дата устройства на работу</label>
+          <input type="date" class="form-control" id="worksFrom" name="worksFrom" [(ngModel)]="newEmployee.worksFrom">
+          <div id="worksFromHelp" class="form-text">Можно не указывать, если неизвестна.</div>
+        </div>
+        <div class="mb-3">
+          <label for="departmentName" class="form-label">Отдел</label>
+          <input type="text" class="form-control" id="departmentName" name="departmentName"
+          [(ngModel)]="newEmployee.departmentName" (focus)="showDeps=true;">
+          <div id="departmentNameHelp" class="form-text">Если название не совпадает ни с одним из существующих отделов - будет создан новый отдел.</div>
+        </div>
+        <div class="mb-3">
+          <label for="salary" class="form-label" >Заработная плата</label>
+          <input type="number" class="form-control" id="salary" name="salary" [(ngModel)]="newEmployee.salary">
+        </div>
+        <button type="submit" class="btn btn-success my-5">Добавить</button>
+        <button type="cancel" class="btn btn-danger mx-3" routerLink="/employees">Выйти</button>
+      </form>
+    </div>
+    <div class="col-1">
+    </div>
+    <div class="col-3" *ngIf="showDeps">
+      <h5 class="mb-3">Существующие отделы:</h5>
+      <table>
+        <tr *ngFor="let dep of departments">
+          <td>{{ dep }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
