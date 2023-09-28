@@ -36,7 +36,7 @@ export class DeleteEmployeeComponent {
   deleteEmployee() {
     this.service.deleteEmployee(this.id)
     .subscribe({
-      next: (e) => {
+      next: () => {
         this.router.navigate(['/employees']);
       }
     })

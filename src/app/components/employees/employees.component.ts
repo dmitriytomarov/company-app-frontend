@@ -11,7 +11,8 @@ import { EmployeesService } from 'src/app/servises/employees.service';
 export class EmployeesComponent implements OnInit {
 
   employees: Employee[] = [];
-  status: string = 'Не найдено...'
+  status: string = '';
+  isConnected: boolean = false;
 
   fullName: string ='';
   filterDep: string ='';
@@ -26,11 +27,12 @@ export class EmployeesComponent implements OnInit {
     this.status = 'Загрузка...';
     this.employeesService.getAllEmployees().subscribe({
       next: (e) => {
+        this.isConnected = true;
         this.employees = e;
-        console.log(e);
-        if (this.employees.length === 0) { this.status = "Не найдено сотрудников."; }
+        if (this.employees.length === 0) { this.status = "Список сотрудников пуст..."; }
       },
-      error: (e) => { console.log (e);
+      error: () => {
+        this.isConnected = false;
         this.status = 'Нет соединения с API...';
       }
     }

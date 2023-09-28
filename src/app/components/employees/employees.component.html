@@ -1,6 +1,14 @@
 <div class="container">
-  <h1 class="mb-4">Сотрудники</h1>
-  <P *ngIf="!(employees.length > 0)">{{ status }}</P>
+
+  <div class="d-flex">
+    <h1 class="mb-4 me-5">Сотрудники</h1>
+    <div *ngIf="isConnected">
+      <button class="ms-5 mt-2 btn btn-outline-success btn-sm" title="Новый сотрудник" routerLink="add">Добавить</button>
+      <!-- <button class="ms-3 mt-2 btn btn-secondary btn-sm" title="Пока не работает!!! Импорт сотрудников из csv/xlsx файла" style="padding-right: 1.1rem;">+ Импорт</button> -->
+    </div>
+  </div>
+
+  <p *ngIf="!(employees.length > 0)">{{ status }}</p>
 
   <table class="table table-hover" *ngIf="employees.length > 0">
     <thead>
@@ -20,7 +28,7 @@
         <td style="min-width:max-content">Дата устройства на работу</td>
         <td style="min-width:max-content">Заработная плата</td>
         <td hidden>Id</td>
-        <td style="width: 150px;"></td>
+        <td style="width: 100px;"></td>
       </tr>
     </thead>
     <tbody>
@@ -31,10 +39,10 @@
         <td>{{ e.worksFrom |date : 'dd.MM.YYYY' }}</td>
         <td>{{ e.salary }}</td>
         <td hidden>{{ e.id }}</td>
-        <td style="align-content: right;">
-          <button type="button" class="btn btn-success btn-sm me-md-2" routerLink="add">+</button>
-          <button type="button" class="btn btn-warning btn-sm me-md-2" [routerLink]="['edit', e.id]">...</button>
-          <button type="button" class="btn btn-danger btn-sm me-md-2" [routerLink]="['delete', e.id]">x</button>
+        <td>
+          <!-- <button type="button" class="btn btn-success btn-sm me-md-2" routerLink="add">+</button> -->
+          <button type="button" class="btn btn-warning btn-sm me-md-2" title="Редактировать" [routerLink]="['edit', e.id]">...</button>
+          <button type="button" class="btn btn-danger btn-sm me-md-2" title="Удалить" [routerLink]="['delete', e.id]">x</button>
         </td>
       </tr>
     </tbody>

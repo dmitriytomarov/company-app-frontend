@@ -36,9 +36,14 @@
     <div class="col-3" *ngIf="showDeps">
       <h5 class="mb-3">Существующие отделы:</h5>
       <table>
-        <tr *ngFor="let dep of departments">
-          <td>{{ dep }}</td>
-        </tr>
+        <ng-container *ngIf="departments.length>0;else noDepartments">
+          <tr *ngFor="let dep of departments">
+            <td>{{ dep }}</td>
+          </tr>
+        </ng-container>
+        <ng-template #noDepartments>
+          <span>Список отделов пуст...</span>
+        </ng-template>
       </table>
     </div>
   </div>
